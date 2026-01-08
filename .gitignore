@@ -1,0 +1,8 @@
+#Project config
+.env
+Profile.pdf
+summary.txt
+
+
+#Python
+venv/

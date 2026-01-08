@@ -1,0 +1,7 @@
+#Dependencies required to run the Agent
+python-dotenv
+openai
+pypdf
+gradio
+google-genai
+
