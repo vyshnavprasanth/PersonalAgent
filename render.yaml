@@ -1,0 +1,31 @@
+# Render Blueprint Configuration
+# This file defines how your application should be deployed on Render
+
+services:
+  # Define a web service (accessible via HTTP)
+  - type: web
+    # Name of your service (appears in Render dashboard)
+    name: agent-vyshnav
+    
+    # Runtime environment (Python in this case)
+    env: python
+    
+    # Command to install dependencies before deployment
+    # This runs during the build phase
+    buildCommand: pip install -r requirements.txt
+    
+    # Command to start your application
+    # This runs when the service starts
+    startCommand: python agent_vyshnav.py
+    
+    # Environment variables your app needs
+    envVars:
+      # Your Gemini API key (sensitive, don't commit the actual value)
+      - key: GEMINI_API_KEY
+        # sync: false means you need to set this value manually in Render dashboard
+        # sync: true would try to sync from a secret group (not needed here)
+        sync: false
+    
+    # Pricing plan (free tier - spins down after 15 min inactivity)
+    plan: free
+

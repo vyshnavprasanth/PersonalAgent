@@ -76,4 +76,6 @@ def chat(message, history):
     return response.text
 
 demo=gr.ChatInterface(fn=chat)
-demo.launch(demo.launch(server_name="0.0.0.0"))
+# Get port from environment variable (Render provides this) or default to 7860
+port = int(os.getenv("PORT", 7860))
+demo.launch(server_name="0.0.0.0", server_port=port)
