@@ -4,6 +4,7 @@ from google import genai
 from pypdf import PdfReader
 import os
 import gradio as gr
+from google.genai.types import GenerateContentConfig
 
 #extract inormation from Profile.df
 reader = PdfReader("Profile.pdf")
@@ -51,10 +52,10 @@ def chat(message, history):
     contents = []
 
     # System instruction (first message)
-    contents.append({
-        "role": "user",
-        "parts": [{"text": system_prompt}]
-    })
+    # contents.append({
+    #     "role": "user",
+    #     "parts": [{"text": system_prompt}]
+    # })
 
     #only past 'max_turn' conversation need to be sent to the model every time
     max_turn=4
@@ -72,6 +73,9 @@ def chat(message, history):
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=contents,
+         config=GenerateContentConfig(
+        system_instruction=system_prompt
+    )
     )
     return response.text
 
